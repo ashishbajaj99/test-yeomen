@@ -9,8 +9,10 @@ angular.module('dashboardAppApp', [
   'stormpath.templates'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $rootScopeProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+    $urlRouterProvider.otherwise( function($injector, $location) {
+      var $state = $injector.get("$state");
+      $state.go("main"); //redirect to a 404 page
+    });
 
     $locationProvider.html5Mode(true);
     // $rootScopeProvider.digestTtl(1000);
